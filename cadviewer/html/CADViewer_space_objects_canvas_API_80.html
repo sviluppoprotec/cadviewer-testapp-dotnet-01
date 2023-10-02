@@ -2104,7 +2104,68 @@
 
 		// END OF MOUSE OPERATION
 
+		// FEDERICO'S OPS
 
+		function EvidenziaRoombyTreeCheckBox(roomCode, selected) {
+			console.log('EvidenziaRoombyTreeCheckBox', roomCode);
+			cvjs_clearSpaceLayer();
+			//cvjs_clearSpaceLayer();
+			//cvjs_searchTextNext(roomCode, 400);
+			cvjs_zoomHere_ObjectId(roomCode, 20);
+			let crList = selectedRooms;
+
+			crList.forEach((x, i) => {
+				//console.log('check', c.val());
+				let roomCodex = x;
+
+				cvjs_highlightSpace(roomCodex, highlight_blue);
+				//cvjs_ObjectSelected(roomCodex, floorplan_div);
+				cvjs_highlightSpace(roomCodex + '_', highlight_blue);
+				//cvjs_ObjectSelected(roomCodex + '_', floorplan_div);
+			});
+
+		}
+
+		function EvidenziaAssetByTreeCheckBox(assetCode, selected) {
+			console.log('AssetRoombyTreeCheckBox', assetCode);
+			cvjs_clearSpaceLayer();
+			//cvjs_clearSpaceLayer();
+			cvjs_zoomHere_ObjectId(assetCode, 20);
+			let crList = selectedAssets;
+			crList.forEach((x, i) => {
+				//console.log('check', c.val());
+				let assetCodex = x;
+
+				cvjs_highlightSpace(assetCodex, highlight_blue);
+				//cvjs_ObjectSelected(assetCodex, floorplan_div);
+				cvjs_highlightSpace(assetCodex + '_', highlight_blue);
+				//cvjs_ObjectSelected(assetCodex + '_', floorplan_div);
+			});
+
+		}
+
+		var highlight_blue = {
+			fill: '#0c8dff',
+			'fill-opacity': 0.8,
+			stroke: '#003366',           // midnight blue 003366 ,    #0c8dff
+			'stroke-width': 2.0,
+			'stroke-opacity': 1.0,
+			'stroke-linejoin': 'round'
+		};
+
+
+		var selectedRooms = [];
+		var selectedAssets = [];
+
+		function hilightlayer() {
+			selectedRooms = [$("#federico_block_id").val()];
+			EvidenziaRoombyTreeCheckBox($("#federico_block_id").val());
+		}
+
+		function hilightlayer2() {
+			selectedAssets = [$("#federico_block_id2").val()];
+			EvidenziaAssetByTreeCheckBox($("#federico_block_id2").val());
+		}
 	</script>
 
 
@@ -2129,32 +2190,35 @@
 		<canvas id="dummy" width="10" height="10"></canvas>
 		</td>
 		<td>
-        <b>Highlight based on Color:&nbsp; </b> <input id="cvjs_backgroundPickerValue" value="AAAA00" class="cvjs_inputBackgroundColorModal jscolor {width:101, padding:10, shadow:false, borderWidth:0, backgroundColor:'transparent', insetColor:'#AAAA00',closable:true, closeText:'Close Color Picker!', onFineChange:'custom_ColorHex(this)'}">        
-        <button class="w3-button demo" onClick="highlight_all_spaces();">Spaces</button>
-        <button class="w3-button demo" onClick="highlight_all_borders();">Borders</button>
-        <button class="w3-button demo" onClick="highlight_space_type();">Space Type</button>
-        <button class="w3-button demo" onClick="highlight_space_id();">Space ID</button>
-        <button class="w3-button demo" onClick="clear_space_highlight();">Clear All</button>
-		<button class="w3-button demo" onClick="display_all_objects();">All:(id,area)</button>
-		<button class="w3-button demo" onClick="customAddTextToSpaces();">Label Spaces with Text</button>
-		<button class="w3-button demo" onClick="customHatchSpaces();">Hatch Spaces</button>
-		<button class="w3-button demo" onClick="customColorHandles();">Color Handles</button>
-		&nbsp&nbsp&nbsp&nbsp<button class="w3-button demo" onClick="customColorLayer();">Color Layer</button>
-		<input type="text" id="layer_id" value="RM_" />
-		
+			<b>Highlight based on Color:&nbsp; </b> <input id="cvjs_backgroundPickerValue" value="AAAA00" class="cvjs_inputBackgroundColorModal jscolor {width:101, padding:10, shadow:false, borderWidth:0, backgroundColor:'transparent', insetColor:'#AAAA00',closable:true, closeText:'Close Color Picker!', onFineChange:'custom_ColorHex(this)'}">
+			<button class="w3-button demo" onClick="highlight_all_spaces();">Spaces</button>
+			<button class="w3-button demo" onClick="highlight_all_borders();">Borders</button>
+			<button class="w3-button demo" onClick="highlight_space_type();">Space Type</button>
+			<button class="w3-button demo" onClick="highlight_space_id();">Space ID</button>
+			<button class="w3-button demo" onClick="clear_space_highlight();">Clear All</button>
+			<button class="w3-button demo" onClick="display_all_objects();">All:(id,area)</button>
+			<button class="w3-button demo" onClick="customAddTextToSpaces();">Label Spaces with Text</button>
+			<button class="w3-button demo" onClick="customHatchSpaces();">Hatch Spaces</button>
+			<button class="w3-button demo" onClick="customColorHandles();">Color Handles</button>
+			&nbsp&nbsp&nbsp&nbsp<button class="w3-button demo" onClick="customColorLayer();">Color Layer</button>
+			<input type="text" id="layer_id" value="RM_" />
 
-		<br><strong>Samples - Custom Canvas:&nbsp;</strong><canvas id="dummy" width="10" height="10"></canvas>
-		<button class="w3-button demo" onClick="cvjs_executeCustomCanvasMethod_drag(generic_start_method_01, generic_stop_method_01, generic_move_method_01,'');">console trace Canvas-DRAG</button>
-		<button class="w3-button demo" onClick="cvjs_executeCustomCanvasMethod_click(generic_mousemove_method_01, generic_mousedown_method_01, generic_mouseup_method_01, generic_dblclick_method_01,'');">console trace Canvas-CLICK</button>
-		<button class="w3-button demo" onClick="cvjs_executeCustomCanvasMethod_click(generic_make_rect_mousemove_method, generic_make_rect_mousedown_method, generic_make_rect_mouseup_method, '', generic_make_rect_init_method);">Make Rect Canvas-CLICK</button>
-		<button class="w3-button demo" onClick="cvjs_executeCustomCanvasMethod_drag(generic_drag_rect_start, generic_drag_rect_stop, generic_drag_rect_move,'');">Make Rect Canvas-DRAG</button>
-		<button class="w3-button demo" onClick="cvjs_executeCustomCanvasMethod_drag(select_drag_rect_start, select_drag_rect_stop, select_drag_rect_move,'');">Select Spaces Rect Canvas-DRAG (rl/tl in ax2020)</button>
-		<button class="w3-button demo" onClick="cvjs_executeCustomCanvasMethod_click(generic_make_rect_arrow_mousemove_method, generic_make_rect_arrow_mousedown_method, generic_make_rect_arrow_mouseup_method, generic_make_rect_arrow_dblclick_method, generic_make_rect_arrow_init_method);">Make Box/Arrow Canvas-CLICK</button>
-		<button class="w3-button demo" onClick="cvjs_executeCustomCanvasMethod_click(generic_handles_mousemove_method_01, generic_handles_mousedown_method_01, generic_handles_mouseup_method_01, generic_handles_dblclick_method_01,generic_handles_init_method_01);">Select Handles  Canvas-Click (DblClick End)  (hlall in ax2020)</button>
-        
-        <br/><b>JSON file sample(Relay - relaysample-01.json):&nbsp;</b><button className="w3-button demo" onClick="lock_all();">Lock all Relays</button>&nbsp;<button className="w3-button demo" onClick="unlock_all();">Unlock all Relays</button>&nbsp; <input type="text" id="relay_id" value="relay_01" />&nbsp;<button className="w3-button demo" onClick="unlock_single();">Unlock Relay</button>&nbsp;<button className="w3-button demo" onClick="lock_single();">Lock Relay</button>&nbsp;
-        <br/><b>Change Text in Arrow Symbol(Space ID upper left):&nbsp;</b><input type="text" id="arrow_text" value="new text" />&nbsp;</b><button className="w3-button demo" onClick="change_arrow_text();">Change Arrow Text</button>
-    </p></td>
+
+			<br><strong>Samples - Custom Canvas:&nbsp;</strong><canvas id="dummy" width="10" height="10"></canvas>
+			<button class="w3-button demo" onClick="cvjs_executeCustomCanvasMethod_drag(generic_start_method_01, generic_stop_method_01, generic_move_method_01,'');">console trace Canvas-DRAG</button>
+			<button class="w3-button demo" onClick="cvjs_executeCustomCanvasMethod_click(generic_mousemove_method_01, generic_mousedown_method_01, generic_mouseup_method_01, generic_dblclick_method_01,'');">console trace Canvas-CLICK</button>
+			<button class="w3-button demo" onClick="cvjs_executeCustomCanvasMethod_click(generic_make_rect_mousemove_method, generic_make_rect_mousedown_method, generic_make_rect_mouseup_method, '', generic_make_rect_init_method);">Make Rect Canvas-CLICK</button>
+			<button class="w3-button demo" onClick="cvjs_executeCustomCanvasMethod_drag(generic_drag_rect_start, generic_drag_rect_stop, generic_drag_rect_move,'');">Make Rect Canvas-DRAG</button>
+			<button class="w3-button demo" onClick="cvjs_executeCustomCanvasMethod_drag(select_drag_rect_start, select_drag_rect_stop, select_drag_rect_move,'');">Select Spaces Rect Canvas-DRAG (rl/tl in ax2020)</button>
+			<button class="w3-button demo" onClick="cvjs_executeCustomCanvasMethod_click(generic_make_rect_arrow_mousemove_method, generic_make_rect_arrow_mousedown_method, generic_make_rect_arrow_mouseup_method, generic_make_rect_arrow_dblclick_method, generic_make_rect_arrow_init_method);">Make Box/Arrow Canvas-CLICK</button>
+			<button class="w3-button demo" onClick="cvjs_executeCustomCanvasMethod_click(generic_handles_mousemove_method_01, generic_handles_mousedown_method_01, generic_handles_mouseup_method_01, generic_handles_dblclick_method_01,generic_handles_init_method_01);">Select Handles  Canvas-Click (DblClick End)  (hlall in ax2020)</button>
+
+			<br /><b>JSON file sample(Relay - relaysample-01.json):&nbsp;</b><button className="w3-button demo" onClick="lock_all();">Lock all Relays</button>&nbsp;<button className="w3-button demo" onClick="unlock_all();">Unlock all Relays</button>&nbsp; <input type="text" id="relay_id" value="relay_01" />&nbsp;<button className="w3-button demo" onClick="unlock_single();">Unlock Relay</button>&nbsp;<button className="w3-button demo" onClick="lock_single();">Lock Relay</button>&nbsp;
+			<br /><b>Change Text in Arrow Symbol(Space ID upper left):&nbsp;</b><input type="text" id="arrow_text" value="new text" />&nbsp;</b><button className="w3-button demo" onClick="change_arrow_text();">Change Arrow Text</button>
+			<br /><b>Federico: highlight room </b><input type="text" id="federico_block_id" value="0004723-P01-0003" /> <button type="button" onclick="hilightlayer()">Hilight room</button> other may be 0004723-P01-0003
+			<br /><b>Federico: highlight device </b><input type="text" id="federico_block_id2" value="102DD99" /> <button type="button" onclick="hilightlayer2()">Hilight device</button>
+			</p>
+		</td>
     </tr> 
 </tbody>
 	</table>
