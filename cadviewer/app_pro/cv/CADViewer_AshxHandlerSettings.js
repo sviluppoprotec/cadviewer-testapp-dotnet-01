@@ -1,7 +1,7 @@
 // CADVIEWER INSTALLATION FOLDERS
 
 // Location of installation Path
-	var ServerLocation = "C:\\cadviewer-testapp-dotnet-01\\cadviewer\\"; 	            // .NET  Windows
+	var ServerLocation = "C:\\git\cadviewer-testapp-dotnet-01\\cadviewer\\"; 	            // .NET  Windows
 // Location of installation Url
 	var ServerUrl = "http://localhost:44371/";        					// .NET Windows
 
